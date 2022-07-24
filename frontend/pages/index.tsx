@@ -11,6 +11,7 @@ import BGImage from "../public/background.jpg";
 // Components
 import Header from "../components/Header";
 import Hero from "../components/Hero";
+import List from "../components/List";
 
 const Home: NextPage = () => {
   //* States
@@ -76,7 +77,7 @@ const Home: NextPage = () => {
           backgroundSize: "cover",
           backgroundPosition: "50% 100%",
         }}
-        className="bg-transparent w-screen h-screen"
+        className="bg-transparent w-screen h-screen flex flex-col"
       >
         <Header
           loading={loading}
@@ -84,6 +85,7 @@ const Home: NextPage = () => {
           connect={connect}
         />
         <Hero />
+        <List />
       </div>
     </>
   );
