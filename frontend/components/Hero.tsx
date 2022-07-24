@@ -1,16 +1,36 @@
 import { NextPage } from "next";
 
-const Hero: NextPage = () => {
+const Hero: NextPage<any> = ({ register, remainingWL, walletConnected }) => {
   function renderSection() {
-    if (false) {
-      return <h1 className="text-4xl">The whitelist is over!</h1>;
+    if (!walletConnected) {
+      return <h1 className="text-4xl">You got to connect your wallet!</h1>;
+    } else if (remainingWL === 0) {
+      return (
+        <>
+          <h1 className="text-4xl">Whitelist sale is over!</h1>
+          <p>
+            {remainingWL} whitelist spot{remainingWL !== 1 && "s"} remaining
+          </p>
+          <div className="space-x-6">
+            <button disabled className="btn btn-primary">
+              Register
+            </button>
+          </div>
+        </>
+      );
+    } else if (register) {
+      return <h1 className="text-4xl">You have already registered!</h1>;
     } else {
       return (
         <>
           <h1 className="text-4xl">You can still register for whitelist</h1>
+          <p>
+            {remainingWL} whitelist spot{remainingWL !== 1 && "s"} remaining
+          </p>
           <div className="space-x-6">
-            <button className="btn btn-primary">Register</button>
-            {false && <button className="btn btn-primary">Withdraw</button>}
+            <button disabled={remainingWL === 0} className="btn btn-primary">
+              Register
+            </button>
           </div>
         </>
       );

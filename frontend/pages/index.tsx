@@ -1,10 +1,11 @@
-import { ethers } from "ethers";
+import { BigNumber, Contract, ethers, providers } from "ethers";
 import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { useEffect, useRef, useState } from "react";
 import Core from "web3modal";
 import Web3Modal from "web3modal";
 import { useSnackbar } from "notistack";
+import { WHITELIST_ABI, WHITELIST_ADDRESS } from "../constants";
 
 import BGImage from "../public/background.jpg";
 
@@ -16,6 +17,8 @@ import List from "../components/List";
 const Home: NextPage = () => {
   //* States
   const [walletConnected, setWalletConnected] = useState<boolean>(false);
+  const [remainingWL, setRemainingWL] = useState<number>(0);
+  const [register, setRegister] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const web3ModalRef = useRef<Core>();
 
@@ -49,12 +52,62 @@ const Home: NextPage = () => {
         });
         const out = await getProviderOrSigner();
         if (out) {
-          setWalletConnected(true);
+          await getRegister();
+          await getRemainingWhitelist();
           enqueueSnackbar("Connected Account", { variant: "success" });
+          setWalletConnected(true);
         }
 
         setLoading(false);
       }
+    } catch (error: any) {
+      enqueueSnackbar(`Error connecting wallet : ${error.message as string}`, {
+        variant: "error",
+      });
+      setLoading(false);
+    }
+  };
+
+  // Gets whether the user is registered
+  const getRegister = async () => {
+    try {
+      setLoading(true);
+      const signer = (await getProviderOrSigner(
+        true
+      )) as providers.JsonRpcSigner;
+      const whitelistContract = await new Contract(
+        WHITELIST_ADDRESS,
+        WHITELIST_ABI,
+        signer
+      );
+      const _address = await signer.getAddress();
+      const _register = await whitelistContract.isWhitelisted(_address);
+      setRegister(_register);
+      setLoading(false);
+    } catch (error: any) {
+      enqueueSnackbar(`Error connecting wallet : ${error.message as string}`, {
+        variant: "error",
+      });
+      setLoading(false);
+    }
+  };
+
+  // Register for whitelist
+
+  // Get remaining whitelists available
+  const getRemainingWhitelist = async () => {
+    try {
+      setLoading(true);
+      const provider = (await getProviderOrSigner()) as providers.Web3Provider;
+      const whitelistContract = await new Contract(
+        WHITELIST_ADDRESS,
+        WHITELIST_ABI,
+        provider
+      );
+      const _currentWL: BigNumber =
+        await whitelistContract.getNumberOfWhitelist();
+      const _maxWL: number = await whitelistContract.maxWhitelistedAddresses();
+      setRemainingWL(_maxWL - _currentWL.toNumber());
     } catch (error: any) {
       enqueueSnackbar(`Error connecting wallet : ${error.message as string}`, {
         variant: "error",
@@ -84,8 +137,15 @@ const Home: NextPage = () => {
           walletConnected={walletConnected}
           connect={connect}
         />
-        <Hero />
+        <Hero
+          walletConnected={walletConnected}
+          remainingWL={remainingWL}
+          register={register}
+        />
         <List />
+        <button className="btn btn-primary" onClick={getRemainingWhitelist}>
+          {remainingWL.toString()}
+        </button>
       </div>
     </>
   );
