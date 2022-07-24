@@ -6,8 +6,11 @@ import Core from "web3modal";
 import Web3Modal from "web3modal";
 import { useSnackbar } from "notistack";
 
+import BGImage from "../public/background.jpg";
+
 // Components
 import Header from "../components/Header";
+import Hero from "../components/Hero";
 
 const Home: NextPage = () => {
   //* States
@@ -66,16 +69,21 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <NextSeo
-        title="Simple Usage Example"
-        description="A short description goes here."
-      />
-      <div>
+      <NextSeo title="Whitelist | DApp" description="Whitelist " />
+      <div
+        style={{
+          background: `url(${BGImage.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "50% 100%",
+        }}
+        className="bg-transparent w-screen h-screen"
+      >
         <Header
           loading={loading}
           walletConnected={walletConnected}
           connect={connect}
         />
+        <Hero />
       </div>
     </>
   );
