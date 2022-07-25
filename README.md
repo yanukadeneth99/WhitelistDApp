@@ -11,11 +11,58 @@
 
 You can whitelist into multiple projects that I plan to do in the future using this. The contract is deployed for 20 public members to become whitelisted. The project is full open-source and therefore free to change following the MIT License.
 
+[Visit Website](https://whitelist-dapp-ten-ivory.vercel.app/)
+
+## Design
+
+Starter Page
+
+![Starter_Image](https://i.imgur.com/HN7kA0F.png)
+
+### Process Handling
+
+Errors are handled via notifications
+
+![Error](https://i.imgur.com/LQY3bLp.png)
+
+Processes are displayed in buttons
+
+![Loading](https://i.imgur.com/0JuMxIl.png)
+
+### Themes
+
+The website has loads of themes the user can select from
+
+![Theme1](https://i.imgur.com/TiXpoph.png)
+![Theme2](https://i.imgur.com/7ML1OX3.png)
+![Theme3](https://i.imgur.com/iquq0YF.png)
+
 ## Contract
 
 The contract is deployed to the Mumbai Testnet on address : [0xb1E540a22F341c6Aba9Dc4e060Aa86A56bBABd19](https://mumbai.polygonscan.com/address/0xb1E540a22F341c6Aba9Dc4e060Aa86A56bBABd19)
 
 ![Deployed_Contract_Image](https://i.imgur.com/TRImBkC.png)
+
+## Starter Project
+
+If you like this template but would like to deploy your own projects following this, check out [@startertemp/nextjs-hardhat-ts at NPM](https://www.npmjs.com/package/@startertemp/nextjs-hardhat-ts)
+
+Or run the below command to get started :
+
+```
+npx @startertemp/nextjs-hardhat-ts my-app
+```
+
+## Installation
+
+Follow the steps to install this on your PC
+
+1. Fork the Github project by clicking on the Fork button at the top of this README.md
+2. Clone the project onto your desktop
+3. Make sure you have pnpm installed, if not install it by running `npm i -g pnpm`
+4. For backend installations run `cd backend && pnpm install`
+5. For frontend installations run `cd frontend && pnpm install`
+6. Run the frontend by running `cd frontend && pnpm dev`
 
 ## Technologies Used
 

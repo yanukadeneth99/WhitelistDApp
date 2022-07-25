@@ -7,8 +7,6 @@ import Web3Modal from "web3modal";
 import { useSnackbar } from "notistack";
 import { WHITELIST_ABI, WHITELIST_ADDRESS } from "../constants";
 
-import BGImage from "../public/background.jpg";
-
 // Components
 import Header from "../components/Header";
 import Hero from "../components/Hero";
