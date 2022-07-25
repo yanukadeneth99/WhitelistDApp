@@ -13,14 +13,20 @@ const Hero: NextPage<any> = ({
     if (!walletConnected) {
       return (
         <>
-          <h1 className="text-4xl">You&apos;ve got to connect your wallet!</h1>
+          <h1 className="text-4xl text-center">
+            You&apos;ve got to connect your wallet!
+          </h1>
         </>
       );
     } else if (remainingWL === 0) {
       return (
         <>
-          <h1 className="text-4xl">Whitelist sale is over!</h1>
-          <p>Account address : {walletAddress}</p>
+          <h1 className="text-4xl lg:text-5xl text-center">
+            Whitelist sale is over!
+          </h1>
+          <p className="text-xs md:text-base text-center">
+            Account address : {walletAddress}
+          </p>
           <p>
             {remainingWL} whitelist spot{remainingWL !== 1 && "s"} remaining
           </p>
@@ -34,15 +40,21 @@ const Hero: NextPage<any> = ({
     } else if (register) {
       return (
         <>
-          <h1 className="text-4xl">You have already registered!</h1>
-          <p>Account address : {walletAddress}</p>
+          <h1 className="text-4xl text-center">You have already registered!</h1>
+          <p className="text-xs md:text-base text-center">
+            Account address : {walletAddress}
+          </p>
         </>
       );
     } else {
       return (
         <>
-          <h1 className="text-4xl">You can still register for whitelist</h1>
-          <p>Account address : {walletAddress}</p>
+          <h1 className="text-3xl text-center">
+            You can still register for whitelist
+          </h1>
+          <p className="text-xs md:text-base text-center">
+            Account address : {walletAddress}
+          </p>
           <p>
             {remainingWL} whitelist spot{remainingWL !== 1 && "s"} remaining
           </p>
@@ -66,8 +78,8 @@ const Hero: NextPage<any> = ({
 
   return (
     <>
-      <div className="w-3/4 h-auto p-5 mx-auto pt-40">
-        <div className="flex flex-col bg-base-100/80 rounded-2xl justify-center items-center p-12 backdrop-blur-lg shadow space-y-8">
+      <div className="md:w-3/4 h-auto w-full p-5 mx-auto md:pt-20 lg:pt-40">
+        <div className="flex flex-col bg-base-100/80 rounded-2xl justify-center items-center p-5 md:p-12 backdrop-blur-lg shadow space-y-8">
           {renderSection()}
         </div>
       </div>

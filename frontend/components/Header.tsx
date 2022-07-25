@@ -19,7 +19,7 @@ const Header: NextPage<any> = ({ connect, walletConnected, loading }) => {
 
   return (
     <>
-      <div className="w-full flex flex-row justify-around bg-base-200 items-center p-6 shadow-xl">
+      <div className="w-screen flex flex-col md:flex-row justify-center md:justify-around bg-base-200 items-center p-6 shadow-xl">
         <div>
           <button className="btn btn-ghost normal-case text-xl">
             Whitelist DApp

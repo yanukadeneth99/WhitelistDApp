@@ -168,7 +168,8 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <NextSeo title="Whitelist | DApp" description="Whitelist " />
+      {/* //TODO : FILL IN THIS */}
+      <NextSeo title="Whitelist | DApp" description="Whitelist" />
       <div
         style={{
           background: `url(${BGImage.src})`,

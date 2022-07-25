@@ -12,7 +12,7 @@ const _ThemeSelector: NextPage = () => {
       </label>
       <ul
         tabIndex={0}
-        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 h-52 overflow-y-scroll overflow-x-hidden"
+        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-32 h-52 md:w-52 md:h-52 overflow-y-scroll overflow-x-hidden"
       >
         <li>
           <a onClick={() => setTheme("light")}>Light Mode</a>
