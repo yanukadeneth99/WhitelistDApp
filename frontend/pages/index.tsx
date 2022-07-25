@@ -12,11 +12,11 @@ import BGImage from "../public/background.jpg";
 // Components
 import Header from "../components/Header";
 import Hero from "../components/Hero";
-import List from "../components/List";
 
 const Home: NextPage = () => {
   //* States
   const [walletConnected, setWalletConnected] = useState<boolean>(false);
+  const [walletAddress, setWalletAddress] = useState<string>("");
   const [remainingWL, setRemainingWL] = useState<number>(0);
   const [register, setRegister] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,6 +32,7 @@ const Home: NextPage = () => {
     const { chainId } = await web3Provider.getNetwork();
     if (chainId !== 80001) {
       window.alert("Change network to mumbai");
+      return;
     }
     if (needSigner) {
       return await web3Provider.getSigner();
@@ -46,15 +47,20 @@ const Home: NextPage = () => {
         setLoading(true);
         web3ModalRef.current = new Web3Modal({
           network: "mumbai",
-          cacheProvider: true,
           providerOptions: {},
           disableInjectedProvider: false,
         });
-        const out = await getProviderOrSigner();
+        const out = (await getProviderOrSigner(
+          true
+        )) as providers.JsonRpcSigner;
         if (out) {
           await getRegister();
           await getRemainingWhitelist();
-          enqueueSnackbar("Connected Account", { variant: "success" });
+          enqueueSnackbar("Connected Account", {
+            variant: "success",
+            preventDuplicate: true,
+          });
+          setWalletAddress((await out.getAddress()).toLocaleLowerCase());
           setWalletConnected(true);
         }
 
@@ -75,7 +81,7 @@ const Home: NextPage = () => {
       const signer = (await getProviderOrSigner(
         true
       )) as providers.JsonRpcSigner;
-      const whitelistContract = await new Contract(
+      const whitelistContract = new Contract(
         WHITELIST_ADDRESS,
         WHITELIST_ABI,
         signer
@@ -92,14 +98,12 @@ const Home: NextPage = () => {
     }
   };
 
-  // Register for whitelist
-
   // Get remaining whitelists available
   const getRemainingWhitelist = async () => {
     try {
       setLoading(true);
-      const provider = (await getProviderOrSigner()) as providers.Web3Provider;
-      const whitelistContract = await new Contract(
+      const provider = await getProviderOrSigner();
+      const whitelistContract = new Contract(
         WHITELIST_ADDRESS,
         WHITELIST_ABI,
         provider
@@ -116,10 +120,51 @@ const Home: NextPage = () => {
     }
   };
 
+  // Get into Whitelist
+  const becomeWhitelist = async () => {
+    try {
+      setLoading(true);
+      if (remainingWL <= 0) {
+        enqueueSnackbar("All whitelist spots are over", {
+          variant: "error",
+        });
+        setLoading(false);
+        return;
+      } else if (register) {
+        enqueueSnackbar("You are already a whitelister", {
+          variant: "error",
+        });
+        setLoading(false);
+        return;
+      }
+
+      // If alls good
+      const signer = (await getProviderOrSigner(
+        true
+      )) as providers.JsonRpcSigner;
+      const whitelistContract = await new Contract(
+        WHITELIST_ADDRESS,
+        WHITELIST_ABI,
+        signer
+      );
+      const tx = await whitelistContract.joinWhitelist();
+      await tx.wait();
+      enqueueSnackbar("Registered for Whitelist!", { variant: "success" });
+      await getRemainingWhitelist();
+      await getRegister();
+      setLoading(false);
+    } catch (error: any) {
+      enqueueSnackbar(`Error connecting wallet : ${error.message as string}`, {
+        variant: "error",
+      });
+      setLoading(false);
+    }
+  };
+
   // Run Connect as page loads
-  // useEffect(() => {
-  //   if (!walletConnected) connect();
-  // }, [walletConnected]);
+  useEffect(() => {
+    if (!walletConnected) connect();
+  }, [walletConnected]);
 
   return (
     <>
@@ -130,7 +175,7 @@ const Home: NextPage = () => {
           backgroundSize: "cover",
           backgroundPosition: "50% 100%",
         }}
-        className="bg-transparent w-screen h-screen flex flex-col"
+        className="bg-transparent w-screen h-screen"
       >
         <Header
           loading={loading}
@@ -141,11 +186,10 @@ const Home: NextPage = () => {
           walletConnected={walletConnected}
           remainingWL={remainingWL}
           register={register}
+          becomeWhitelist={becomeWhitelist}
+          loading={loading}
+          walletAddress={walletAddress}
         />
-        <List />
-        <button className="btn btn-primary" onClick={getRemainingWhitelist}>
-          {remainingWL.toString()}
-        </button>
       </div>
     </>
   );
