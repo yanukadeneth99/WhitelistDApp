@@ -168,8 +168,10 @@ const Home: NextPage = () => {
 
   return (
     <>
-      {/* //TODO : FILL IN THIS */}
-      <NextSeo title="Whitelist | DApp" description="Whitelist" />
+      <NextSeo
+        title="Whitelist | DApp"
+        description="A whitelist DAPP to register yourself using a wallet on the Mumbai testnet which will give the user added benefits on the other projects created by Yanuka Deneth"
+      />
       <div
         style={{
           background: `url(${BGImage.src})`,
