@@ -43,6 +43,13 @@ const Home: NextPage = () => {
   // Connect to the wallet
   const connect = async () => {
     try {
+      if (!window.ethereum) {
+        enqueueSnackbar("You have to install a provider like Metamask", {
+          variant: "error",
+          preventDuplicate: true,
+        });
+        return;
+      }
       if (!walletConnected) {
         setLoading(true);
         web3ModalRef.current = new Web3Modal({
@@ -172,14 +179,7 @@ const Home: NextPage = () => {
         title="Whitelist | DApp"
         description="A whitelist DAPP to register yourself using a wallet on the Mumbai testnet which will give the user added benefits on the other projects created by Yanuka Deneth"
       />
-      <div
-        style={{
-          background: `url(${BGImage.src})`,
-          backgroundSize: "cover",
-          backgroundPosition: "50% 100%",
-        }}
-        className="bg-transparent w-screen h-screen"
-      >
+      <div className="bg-transparent w-screen h-screen">
         <Header
           loading={loading}
           walletConnected={walletConnected}

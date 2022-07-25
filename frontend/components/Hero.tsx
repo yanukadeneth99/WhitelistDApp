@@ -79,7 +79,7 @@ const Hero: NextPage<any> = ({
   return (
     <>
       <div className="md:w-3/4 h-auto w-full p-5 mx-auto md:pt-20 lg:pt-40">
-        <div className="flex flex-col bg-base-100/80 rounded-2xl justify-center items-center p-5 md:p-12 backdrop-blur-lg shadow space-y-8">
+        <div className="flex flex-col bg-base-100/80 rounded-2xl justify-center items-center p-5 md:p-12 backdrop-blur-lg shadow-md border-2 border-primary/30 space-y-8">
           {renderSection()}
         </div>
       </div>
