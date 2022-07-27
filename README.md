@@ -39,9 +39,9 @@ The website has loads of themes the user can select from
 
 ## Contract
 
-The contract is deployed to the Mumbai Testnet on address : [0xb1E540a22F341c6Aba9Dc4e060Aa86A56bBABd19](https://mumbai.polygonscan.com/address/0xb1E540a22F341c6Aba9Dc4e060Aa86A56bBABd19)
+The contract is deployed to the Rinkeby Testnet on address : [0x70d38c0a442358A9b72905B8326dBf74B0E073D6](https://rinkeby.etherscan.io/address/0x70d38c0a442358A9b72905B8326dBf74B0E073D6#code)
 
-![Deployed_Contract_Image](https://i.imgur.com/TRImBkC.png)
+![Deployed_Contract_Image](https://i.imgur.com/US4eTGZ.png)
 
 ## Starter Project
 

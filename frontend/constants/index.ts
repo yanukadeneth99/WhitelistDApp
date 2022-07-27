@@ -1,4 +1,4 @@
-export const WHITELIST_ADDRESS = "0xb1E540a22F341c6Aba9Dc4e060Aa86A56bBABd19";
+export const WHITELIST_ADDRESS = "0x70d38c0a442358A9b72905B8326dBf74B0E073D6";
 export const WHITELIST_ABI = [
   {
     inputs: [
@@ -59,32 +59,14 @@ export const WHITELIST_ABI = [
   {
     inputs: [],
     name: "getNumberOfWhitelist",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_address",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "_address", type: "address" }],
     name: "isWhitelisted",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "view",
     type: "function",
   },
@@ -98,37 +80,19 @@ export const WHITELIST_ABI = [
   {
     inputs: [],
     name: "maxWhitelistedAddresses",
-    outputs: [
-      {
-        internalType: "uint8",
-        name: "",
-        type: "uint8",
-      },
-    ],
+    outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    outputs: [{ internalType: "address", name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_address",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "_address", type: "address" }],
     name: "removeWhitelist",
     outputs: [],
     stateMutability: "nonpayable",
@@ -142,13 +106,7 @@ export const WHITELIST_ABI = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "newOwner", type: "address" }],
     name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",

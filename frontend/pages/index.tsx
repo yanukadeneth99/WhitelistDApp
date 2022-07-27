@@ -28,8 +28,8 @@ const Home: NextPage = () => {
     const web3Provider = new ethers.providers.Web3Provider(instance);
 
     const { chainId } = await web3Provider.getNetwork();
-    if (chainId !== 80001) {
-      window.alert("Change network to mumbai");
+    if (chainId !== 4) {
+      window.alert("Change network to rinkeby");
       return;
     }
     if (needSigner) {
