@@ -1,0 +1,28 @@
+name: "Up version, build and upload the exported folder to valist"
+
+on:
+  release: types:[published]
+
+jobs:
+  publish:
+    name: start building
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup checkout
+        uses: actions/checkout@v3
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version:16
+          registry-url: https://registry.npmjs.org
+      - name: build and export
+        run: npm install
+        run: npm export
+      - name: upload to valist
+        uses: valist-io/valist-github-action@v2.3.1
+        with:
+          private-key: ${{ secrets.VALIST_KEY }}
+          account: yanukadeneth99
+          project: meme-nft
+          release: ${{ github.event.release.tag_name }}
+          path: './out'

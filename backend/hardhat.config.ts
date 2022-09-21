@@ -6,10 +6,10 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.9",
-  defaultNetwork: "rinkeby",
+  solidity: "0.8.15",
+  defaultNetwork: "mumbai",
   networks: {
-    rinkeby: {
+    mumbai: {
       url: process.env.ALCHEMY_API_KEY_URL,
       accounts: [process.env.MUMBAI_PRIVATE_KEY as string],
     },

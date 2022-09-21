@@ -2,8 +2,8 @@ import { ethers } from "hardhat";
 import hre from "hardhat";
 
 async function main() {
-  const Whitelist: any = await ethers.getContractFactory("Whitelist");
-  const whitelist = await Whitelist.deploy(20);
+  const Whitelist: any = await ethers.getContractFactory("SoulDrop");
+  const whitelist = await Whitelist.deploy("X", "X", 12, 1 ,"Name", "Symbol");
 
   await whitelist.deployed();
 
