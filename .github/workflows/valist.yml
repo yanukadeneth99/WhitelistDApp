@@ -6,25 +6,30 @@ on:
       - master
 
 jobs:
-  publish:
+  valist-publish:
     name: start building
     runs-on: ubuntu-latest
     steps:
-      - name: setup checkout
+      - name: Checkout
         uses: actions/checkout@v3
-      - name: setup node
+
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: build and export
-      - run: cd frontend
-      - run: npm install
-      - run: npm export
+
+      - name: Build and export Next.js app
+        run: |
+          cd frontend
+          npm install
+          npm run build
+          npm run export
+
       - name: upload to valist
-        uses: valist-io/valist-github-action@v2.3.1
+        uses: valist-io/valist-github-action@v2.5.6
         with:
           private-key: ${{ secrets.VALIST_KEY }}
           account: yanukadeneth99
-          project: meme-nft
+          project: whitelist-dapp
           release: ${{ github.event.release.tag_name }}
-          path: "./frontend/out"
+          path: frontend/out
