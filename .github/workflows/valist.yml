@@ -1,8 +1,9 @@
 name: "Up version, build and upload the exported folder to valist"
 
 on:
-  release: 
-    types: [published]
+  push:
+    branches:
+      - master
 
 jobs:
   publish:
@@ -16,8 +17,9 @@ jobs:
         with:
           node-version: 16
       - name: build and export
-        run: cd frontend && npm install
-        run: cd frontend && npm export
+      - run: cd frontend
+      - run: npm install
+      - run: npm export
       - name: upload to valist
         uses: valist-io/valist-github-action@v2.3.1
         with:
@@ -25,4 +27,4 @@ jobs:
           account: yanukadeneth99
           project: meme-nft
           release: ${{ github.event.release.tag_name }}
-          path: './frontend/out'
+          path: "./frontend/out"
