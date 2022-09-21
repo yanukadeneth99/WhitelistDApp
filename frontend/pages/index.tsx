@@ -42,7 +42,7 @@ const Home: NextPage = () => {
   const connect = async () => {
     try {
       if (!window.ethereum) {
-        enqueueSnackbar("You have to install a provider like Metamask", {
+        enqueueSnackbar("You have to install a provider like Metamask!", {
           variant: "error",
           preventDuplicate: true,
         });
